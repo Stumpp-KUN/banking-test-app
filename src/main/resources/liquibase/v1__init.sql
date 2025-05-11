@@ -22,3 +22,12 @@ CREATE TABLE phone_data (
     user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     phone VARCHAR(13) NOT NULL UNIQUE
 );
+
+CREATE TABLE transfers (
+    id BIGSERIAL PRIMARY KEY,
+    from_account_id BIGINT NOT NULL REFERENCES account(id) ON DELETE RESTRICT,
+    to_account_id BIGINT NOT NULL REFERENCES account(id) ON DELETE RESTRICT,
+    amount NUMERIC(19, 2) NOT NULL CHECK (amount > 0),
+    status VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

@@ -14,5 +14,16 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/application_db
+      SPRING_DATASOURCE_USERNAME: application_user
+      SPRING_DATASOURCE_PASSWORD: application_password
+    depends_on:
+      - postgres
+
 volumes:
   postgres_data:
