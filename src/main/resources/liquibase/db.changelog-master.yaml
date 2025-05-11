@@ -1,3 +1,4 @@
 databaseChangeLog:
   - include:
       file: liquibase/v1__init.sql
+      relativeToChangelogFile: false

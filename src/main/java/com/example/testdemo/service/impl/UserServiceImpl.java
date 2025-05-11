@@ -24,9 +24,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(key = "{#spec.toString(), #pageable}")
+    @Cacheable(key = "{#spec?.toString() ?: 'all', #pageable}")
     public Page<UserResponseDto> findUsers(Specification<User> spec, Pageable pageable) {
-        return userRepository.findAll(spec, pageable).map(userMapper::toDto);
+        Specification<User> finalSpec = spec != null ? spec : (root, query, cb) -> cb.conjunction();
+        return userRepository.findAll(finalSpec, pageable).map(userMapper::toDto);
     }
 
 }

@@ -21,4 +21,9 @@ public class EmailData {
 
     @Column(unique = true)
     private String email;
+
+    public EmailData(User user, String email) {
+        this.user = user;
+        this.email = email;
+    }
 }

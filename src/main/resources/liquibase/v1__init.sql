@@ -7,8 +7,9 @@ CREATE TABLE users (
 
 CREATE TABLE account (
     id BIGSERIAL PRIMARY KEY,
-    BIGINT NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
-    balance NUMERIC(19, 2) NOT NULL CHECK (balance >= 0)
+    user_id BIGINT NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+    balance NUMERIC(19, 2) NOT NULL CHECK (balance >= 0),
+    initial_balance NUMERIC(19, 2) NOT NULL CHECK (balance >= 0)
 );
 
 CREATE TABLE email_data (

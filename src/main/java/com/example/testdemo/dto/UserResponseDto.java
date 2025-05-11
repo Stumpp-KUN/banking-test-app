@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,8 +18,8 @@ public class UserResponseDto {
     Long id;
     String name;
     LocalDate dateOfBirth;
-    String email;
-    String phone;
+    List<String> email;
+    List<String> phone;
     BigDecimal balance;
 }
 

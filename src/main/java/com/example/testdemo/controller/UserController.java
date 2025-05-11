@@ -12,6 +12,7 @@ import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.GreaterThan;
 import net.kaczmarzyk.spring.data.jpa.domain.Like;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.Join;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,10 +40,12 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Invalid search parameters")
     })
     public ResponseEntity<Page<UserResponseDto>> findUsers(
+            @Join(path= "emails", alias = "email")
+            @Join(path= "phones", alias = "phones")
             @And({
                     @Spec(path = "dateOfBirth", spec = GreaterThan.class),
-                    @Spec(path = "phoneData.phone", spec = Equal.class),
-                    @Spec(path = "emailData.email", spec = Equal.class),
+                    @Spec(path = "phone.phone", spec = Equal.class),
+                    @Spec(path = "email.email", spec = Equal.class),
                     @Spec(path = "name", spec = Like.class)
             }) Specification<User> spec,
             @PageableDefault Pageable pageable
