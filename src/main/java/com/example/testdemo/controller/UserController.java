@@ -1,6 +1,7 @@
 package com.example.testdemo.controller;
 
 import com.example.testdemo.dto.UserResponseDto;
+import com.example.testdemo.entity.User;
 import com.example.testdemo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -43,7 +44,7 @@ public class UserController {
                     @Spec(path = "phoneData.phone", spec = Equal.class),
                     @Spec(path = "emailData.email", spec = Equal.class),
                     @Spec(path = "name", spec = Like.class)
-            }) Specification spec,
+            }) Specification<User> spec,
             @PageableDefault Pageable pageable
     ) {
         return ResponseEntity.ok(userService.findUsers(spec, pageable));

@@ -5,7 +5,6 @@ import com.example.testdemo.dto.AuthRequest;
 import com.example.testdemo.dto.AuthResponse;
 import com.example.testdemo.entity.User;
 import com.example.testdemo.repository.UserRepository;
-import com.example.testdemo.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-    private final UserDetailsServiceImpl userDetailsService;
     private final JwtService jwtService;
     private final UserRepository userRepository;
 
