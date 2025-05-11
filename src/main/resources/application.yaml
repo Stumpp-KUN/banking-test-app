@@ -1,0 +1,44 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/application_db
+    username: application_user
+    password: application_password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+
+  cache:
+    type: caffeine
+
+  liquibase:
+    change-log: classpath:liquibase/db.changelog-master.yaml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: caches,health,metrics
+  endpoint:
+    caches:
+      enabled: true
+
+jwt:
+  secret-key: d7b7f3e7a1c2e4f8b5d9a3c6e8f2b1d5a7c3e9b2f4d6a8c1e5f9b3d7a2c4e6f8
+  expiration: 86400000
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: WARN
+    com.example.testdemo: DEBUG
+  file:
+    name: logs/application.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

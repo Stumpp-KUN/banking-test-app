@@ -1,0 +1,24 @@
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(500),
+    date_of_birth DATE,
+    password VARCHAR(500) NOT NULL
+);
+
+CREATE TABLE account (
+    id BIGSERIAL PRIMARY KEY,
+    BIGINT NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+    balance NUMERIC(19, 2) NOT NULL CHECK (balance >= 0)
+);
+
+CREATE TABLE email_data (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    email VARCHAR(200) NOT NULL UNIQUE
+);
+
+CREATE TABLE phone_data (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    phone VARCHAR(13) NOT NULL UNIQUE
+);
